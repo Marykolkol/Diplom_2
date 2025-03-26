@@ -8,8 +8,8 @@ import java.util.List;
 public class UserOrderResponse {
     private List<OrderInUserOrderResponse> orders;
     private boolean success;
-    private int total;
-    private int totalToday;
+    private Integer total;
+    private Integer totalToday;
     private String message;
 
     public List<OrderInUserOrderResponse> getOrders() {
@@ -20,11 +20,11 @@ public class UserOrderResponse {
         return success;
     }
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public int getTotalToday() {
+    public Integer getTotalToday() {
         return totalToday;
     }
 
