@@ -38,12 +38,15 @@ public class CreateUserTests {
     @Test
     @DisplayName("Создание неуникального пользователя")
     public void createNotUniqueUser() {
-        userClient.postCreateUser(user);
         ValidatableResponse response = userClient.postCreateUser(user);
-        response.assertThat().statusCode(403);
         userResponse = response.extract().body().as(UserResponse.class);
-        assertFalse(userResponse.isSuccess());
-        assertEquals("User already exists", userResponse.getMessage());
+
+        ValidatableResponse response2 = userClient.postCreateUser(user);
+        response2.assertThat().statusCode(403);
+        UserResponse userResponse2 = response2.extract().body().as(UserResponse.class);
+        assertFalse(userResponse2.isSuccess());
+        assertEquals("User already exists", userResponse2.getMessage());
+
     }
 
     @Test

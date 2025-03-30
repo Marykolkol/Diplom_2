@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static config.StellarBurgerConfig.STELLAR_BASE_URI;
+import static config.StellarBurgerConfig.*;
 import static io.restassured.RestAssured.given;
 
 public class UserClient {
@@ -33,7 +33,7 @@ public class UserClient {
                         .header("Content-type", "application/json")
                         .body(user)
                         .when()
-                        .post("/api/auth/register")
+                        .post(CREATE_USER_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -49,7 +49,7 @@ public class UserClient {
                         .header("Content-type", "application/json")
                         .body(user)
                         .when()
-                        .post("/api/auth/login")
+                        .post(LOGIN_USER_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -65,7 +65,7 @@ public class UserClient {
                         .header("Content-type", "application/json")
                         .body(Map.of("token", refreshToken))
                         .when()
-                        .post("/api/auth/logout")
+                        .post(LOGOUT_USER_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -81,7 +81,7 @@ public class UserClient {
                         .header("Content-type", "application/json")
                         .body(user)
                         .when()
-                        .post("/api/auth/token")
+                        .post(UPDATE_TOKEN_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -97,7 +97,7 @@ public class UserClient {
                         .header("Content-type", "application/json")
                         .body(Map.of("email", email))
                         .when()
-                        .post("/api/password-reset")
+                        .post(RESET_PASSWORD_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -113,7 +113,7 @@ public class UserClient {
                         .header("Content-type", "application/json")
                         .body(Map.of("password", password, "token", token))
                         .when()
-                        .post("/api/password-reset/reset")
+                        .post(RESET_RESET_PASSWORD_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -129,7 +129,7 @@ public class UserClient {
                         .auth().oauth2(token)
                         .header("Content-type", "application/json")
                         .when()
-                        .get("/api/auth/user")
+                        .get(USER_INFO_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -146,7 +146,7 @@ public class UserClient {
                         .header("Content-type", "application/json")
                         .body(user)
                         .when()
-                        .patch("/api/auth/user")
+                        .patch(USER_INFO_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -162,10 +162,9 @@ public class UserClient {
                         .header("Authorization", token)
                         .header("Content-type", "application/json")
                         .when()
-                        .delete("/api/auth/user")
+                        .delete(USER_INFO_ENDPOINT)
                         .then()
                         .log()
                         .all();
     }
-
 }

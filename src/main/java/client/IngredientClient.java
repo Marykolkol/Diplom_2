@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static config.StellarBurgerConfig.LIST_OF_INGREDIENTS_ENDPOINT;
 import static config.StellarBurgerConfig.STELLAR_BASE_URI;
 import static io.restassured.RestAssured.given;
 
@@ -35,7 +36,7 @@ public class IngredientClient {
                         .baseUri(STELLAR_BASE_URI)
                         .header("Content-type", "application/json")
                         .when()
-                        .get("/api/ingredients")
+                        .get(LIST_OF_INGREDIENTS_ENDPOINT)
                         .then()
                         .log()
                         .all();

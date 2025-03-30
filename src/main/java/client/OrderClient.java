@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import model.Order;
 
-import static config.StellarBurgerConfig.STELLAR_BASE_URI;
+import static config.StellarBurgerConfig.*;
 import static io.restassured.RestAssured.given;
 
 public class OrderClient {
@@ -20,7 +20,7 @@ public class OrderClient {
                         .header("Content-type", "application/json")
                         .body(order)
                         .when()
-                        .post("/api/orders")
+                        .post(CREATE_ORDER_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -35,7 +35,7 @@ public class OrderClient {
                         .baseUri(STELLAR_BASE_URI)
                         .header("Content-type", "application/json")
                         .when()
-                        .get("/api/orders/all")
+                        .get(LIST_OF_ORDERS_ENDPOINT)
                         .then()
                         .log()
                         .all();
@@ -51,7 +51,7 @@ public class OrderClient {
                         .header("Authorization", token)
                         .header("Content-type", "application/json")
                         .when()
-                        .get("/api/orders")
+                        .get(USERS_ORDERS_ENDPOINT)
                         .then()
                         .log()
                         .all();
